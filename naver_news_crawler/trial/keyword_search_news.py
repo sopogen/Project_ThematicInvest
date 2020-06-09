@@ -57,7 +57,7 @@ def crawler(query, sort, s_date, e_date):
     page = 1
     driver.get("https://search.naver.com/search.naver?where=news&query=" + query + "&sort=" + sort + "&ds=" + s_date + "&de=" + e_date + "&nso=so%3Ar%2Cp%3Afrom" + s_from + "to" + e_to)
     extracted = driver.find_element_by_xpath('//*[@id="main_pack"]/div[1]/div[1]/div[1]/span').text.split(" ")
-    maxpage = (math.ceil(int(extracted[2].replace("건", "")) / 10)-1)*11 + 1
+    maxpage = (math.ceil(int(extracted[2].replace("건", "").replace(",","")) / 10)-1)*11 + 1
 
     while page <= maxpage:
         url = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=" + sort + "&ds=" + s_date + "&de=" + e_date + "&nso=so%3Ar%2Cp%3Afrom" + s_from + "to" + e_to + "%2Ca%3A&start=" + str(
