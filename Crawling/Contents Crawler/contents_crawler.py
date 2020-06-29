@@ -106,6 +106,7 @@ def delete_useless(contents):
 crawler(maxpage, query, s_date, e_date)  # 검색된 네이버뉴스의 기사내용을 크롤링합니다.
 data = pd.read_csv(RESULT_PATH + '%s.txt' % str(query), sep='\t', header=None, error_bad_lines=False, engine='python')
 data = data[3]
+data = data.dropna(axis=0)
 data = data.drop_duplicates().reset_index()
 data = data[3]
 df = pd.DataFrame(data)

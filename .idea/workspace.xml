@@ -23,8 +23,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Crawling/Contents Crawler/contents_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Crawling/Contents Crawler/contents_crawler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data Preprocessor/Extracting_Theme_Final.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Data Preprocessor/Extracting_Theme_Final.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/theme_news_data/방탄소년단.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/theme_news_data/방탄소년단.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/theme_news_data/방탄소년단.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Data/theme_news_data/방탄소년단.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/theme_news_data/마스크.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/theme_news_data/마스크.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/theme_news_data/방역진단.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Delete_useless_contents.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Delete_useless_contents.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
