@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime
+import re
 import csv
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -81,11 +82,45 @@ def crawler(maxpage, query, s_date, e_date):
 
 
 
+def delete_useless(contents):
+    case1 = re.search('.+?(?=[\.\s\(][a-zA-Z0-9]+?@)', contents)
+    case2 = re.search('.+?(?=▶)', contents)
+    case3 = re.search('.+?(?=\w{3}\s?기자)', contents)
+
+    if case1 != None:
+        contents = case1.group()
+    elif case2 != None:
+        contents = case2.group()
+    elif case3 != None:
+        contents = case3.group()
+
+    case4 = re.search('기자 \= (.+)', contents)
+    case5 = re.search('\](.+)', contents)
+
+    if case4 != None:
+        contents = case4.group(1)
+    elif case5 != None:
+        contents = case5.group(1)
+
+    return contents
+
+
 crawler(maxpage, query, s_date, e_date)  # 검색된 네이버뉴스의 기사내용을 크롤링합니다.
-data = pd.read_csv(RESULT_PATH + '%s.txt' %str(query), sep='\t', header=None, error_bad_lines=False)
+data = pd.read_csv(RESULT_PATH + '%s.txt' % str(query), sep='\t', header=None, error_bad_lines=False)
 data = data[3]
 data = data.drop_duplicates().reset_index()
 data = data[3]
 df = pd.DataFrame(data)
 df.columns = ['contents']
 df.to_csv(RESULT_PATH + "%s.csv" % str(query), encoding='utf-8')
+txt = pd.read_csv(RESULT_PATH + "%s.csv" % str(query), index_col=0)
+lst = []
+for i in range(len(txt)):
+    lst.append(delete_useless(txt.contents[i]))
+final = pd.DataFrame(lst)
+final.columns = ['contents']
+final.to_csv(RESULT_PATH + "%s.csv" % str(query), encoding='utf-8')
+
+
+
+
