@@ -81,11 +81,10 @@ def crawler(maxpage, query, s_date, e_date):
     f.close()
 
 
-
 def delete_useless(contents):
-    case1 = re.search('.+?(?=[\.\s\(][a-zA-Z0-9]+?@)', contents)
-    case2 = re.search('.+?(?=▶)', contents)
-    case3 = re.search('.+?(?=\w{3}\s?기자)', contents)
+    case1 = re.search('.+?(?=[\.\s\(][a-zA-Z0-9]+?@)', str(contents))
+    case2 = re.search('.+?(?=▶)', str(contents))
+    case3 = re.search('.+?(?=\w{3}\s?기자)', str(contents))
 
     if case1 != None:
         contents = case1.group()
@@ -94,8 +93,8 @@ def delete_useless(contents):
     elif case3 != None:
         contents = case3.group()
 
-    case4 = re.search('기자 \= (.+)', contents)
-    case5 = re.search('\](.+)', contents)
+    case4 = re.search('기자 \= (.+)', str(contents))
+    case5 = re.search('\](.+)', str(contents))
 
     if case4 != None:
         contents = case4.group(1)
@@ -103,7 +102,6 @@ def delete_useless(contents):
         contents = case5.group(1)
 
     return contents
-
 
 crawler(maxpage, query, s_date, e_date)  # 검색된 네이버뉴스의 기사내용을 크롤링합니다.
 data = pd.read_csv(RESULT_PATH + '%s.txt' % str(query), sep='\t', header=None, error_bad_lines=False, engine='python')
