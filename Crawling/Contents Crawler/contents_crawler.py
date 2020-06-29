@@ -84,4 +84,8 @@ def crawler(maxpage, query, s_date, e_date):
 crawler(maxpage, query, s_date, e_date)  # 검색된 네이버뉴스의 기사내용을 크롤링합니다.
 data = pd.read_csv(RESULT_PATH + '%s.txt' %str(query), sep='\t', header=None, error_bad_lines=False)
 data = data[3]
-data.to_csv(RESULT_PATH + "%s.csv" % str(query), encoding='utf-8')
+data = data.drop_duplicates().reset_index()
+data = data[3]
+df = pd.DataFrame(data)
+df.columns = ['contents']
+df.to_csv(RESULT_PATH + "%s.csv" % str(query), encoding='utf-8')
