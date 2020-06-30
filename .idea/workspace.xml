@@ -21,11 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ec6805db-6d23-41fb-9975-7c094e598217" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crawling/Contents Crawler/contents_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Crawling/Contents Crawler/contents_crawler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data Preprocessor/Extracting_Theme_Final.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Data Preprocessor/Extracting_Theme_Final.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/theme_news_data/마스크.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/theme_news_data/마스크.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/theme_news_data/방역진단.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Delete_useless_contents.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Delete_useless_contents.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/theme_news_data/2차전지.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/theme_news_data/2차전지.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/theme_news_data/자동차부품.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Data/theme_news_data/자동차부품.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,22 +128,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1419" height="231" key="GridCell.Tab.0.bottom" timestamp="1593442477582">
+    <state width="1419" height="231" key="GridCell.Tab.0.bottom" timestamp="1593478942221">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1419" height="231" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1593442477582" />
-    <state width="1419" height="231" key="GridCell.Tab.0.center" timestamp="1593442477582">
+    <state width="1419" height="231" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1593478942221" />
+    <state width="1419" height="231" key="GridCell.Tab.0.center" timestamp="1593478942220">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1419" height="231" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1593442477582" />
-    <state width="1419" height="231" key="GridCell.Tab.0.left" timestamp="1593442477581">
+    <state width="1419" height="231" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1593478942220" />
+    <state width="1419" height="231" key="GridCell.Tab.0.left" timestamp="1593478942220">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1419" height="231" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1593442477581" />
-    <state width="1419" height="231" key="GridCell.Tab.0.right" timestamp="1593442477582">
+    <state width="1419" height="231" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1593478942220" />
+    <state width="1419" height="231" key="GridCell.Tab.0.right" timestamp="1593478942221">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1419" height="231" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1593442477582" />
+    <state width="1419" height="231" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1593478942221" />
     <state x="221" y="100" key="SettingsEditor" timestamp="1593418159963">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
