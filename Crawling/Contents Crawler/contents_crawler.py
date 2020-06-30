@@ -7,7 +7,7 @@ import csv
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 < naver 뉴스 전문 가져오기 >_select 사용
-- 네이버 뉴스만 가져와서 결과값 조금 작음 
+- 네이버 뉴스만 가져와서 결과값 조금 작음
 - 결과 메모장 저장 -> 엑셀로 저장 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 RESULT_PATH = '/Users/jungyulyang/programming/Project_ThematicInvest/Data/theme_news_data/'
