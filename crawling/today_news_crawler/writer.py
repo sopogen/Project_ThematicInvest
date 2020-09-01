@@ -33,12 +33,12 @@ class Writer(object):
     def initialize_file(self):
         #Window
         if self.user_operating_system == "Windows":
-            self.file = open('/Users/jungyulyang/programming/Project_ThematicInvest/data/today_news_data/'
+            self.file = open('/root/hell-news/data/'
                              + self.category_name + '_' + str(self.save_year) + str(self.save_month)
                              + str(self.save_day) + '.csv', 'w', encoding='euc-kr', newline='')
         # Other OS uses utf-8
         else:
-            self.file = open('/Users/jungyulyang/programming/Project_ThematicInvest/data/today_news_data/'
+            self.file = open('/Users/jungyulyang/programming/hell-news/data/'
                              + self.category_name + '_' + str(self.save_year) + str(self.save_month)
                              + str(self.save_day) + '.csv', 'w', encoding='utf-8',
                              newline='')
@@ -47,15 +47,9 @@ class Writer(object):
         return self.wcsv
     
     def get_file_name(self):
-        #Window
-        if self.user_operating_system == "Windows":
-            fname = '/Users/jungyulyang/programming/Project_ThematicInvest/data/today_news_data/'\
-                + self.category_name + '_' + str(self.save_year) + str(self.save_month)\
-                + str(self.save_day) + '.csv'
-        else:
-            fname = '/Users/jungyulyang/programming/Project_ThematicInvest/data/'\
-                + self.category_name + '_' + str(self.save_year) + str(self.save_month)\
-                + str(self.save_day) + '.csv'
+        fname = str(os.getcwd()) + '/data/'\
+            + self.category_name + '_' + str(self.save_year) + str(self.save_month)\
+            + str(self.save_day) + '.csv'
         return fname
 
     def close(self):
