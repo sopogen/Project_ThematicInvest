@@ -14,10 +14,6 @@ date_text = []
 contents_text = []
 result = {}
 
-#selenium 사용 설정
-path = r"/Users/jungyulyang/programming/chromedriver"
-driver = webdriver.Chrome(path)
-
 # 날짜 정제화 함수
 def date_cleansing(test):
     try:
@@ -51,17 +47,16 @@ def contents_cleansing(contents):
     # print(contents_text)
 
 
-def crawler(query, sort, s_date, e_date):
-    s_from = s_date.replace(".", "")
-    e_to = e_date.replace(".", "")
-    page = 1
-    driver.get("https://search.naver.com/search.naver?where=news&query=" + query + "&sort=" + sort + "&ds=" + s_date + "&de=" + e_date + "&nso=so%3Ar%2Cp%3Afrom" + s_from + "to" + e_to)
-    extracted = driver.find_element_by_xpath('//*[@id="main_pack"]/div[1]/div[1]/div[1]/span').text.split(" ")
-    maxpage = (math.ceil(int(extracted[2].replace("건", "").replace(",","")) / 10)-1)*11 + 1
+def crawler(maxpage,query,sort,s_date,e_date):
 
-    while page <= maxpage:
+    s_from = s_date.replace(".","")
+    e_to = e_date.replace(".","")
+    page = 1
+    maxpage_t =(int(maxpage)-1)*10+1   # 11= 2페이지 21=3페이지 31=4페이지  ...81=9페이지 , 91=10페이지, 101=11페이지
+
+    while page <= maxpage_t:
         url = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=" + sort + "&ds=" + s_date + "&de=" + e_date + "&nso=so%3Ar%2Cp%3Afrom" + s_from + "to" + e_to + "%2Ca%3A&start=" + str(
-            page)
+            page) + "&refresh_start=0"
 
         response = requests.get(url)
         html = response.text
@@ -101,18 +96,19 @@ def crawler(query, sort, s_date, e_date):
         page += 10
 
     # 새로 만들 파일이름 지정\
-    df.to_csv("./data/{start_period}-{end_period}-result.csv".format(start_period=s_date,end_period=e_date))
+    df.to_csv("/Users/jungyulyang/programming/Project_ThematicInvest/{start_period}-{end_period}-result.csv".format(start_period=s_date,end_period=e_date))
 
 
 def main():
     info_main = input("=" * 50 + "\n" + "입력 형식에 맞게 입력해주세요." + "\n" + " 시작하시려면 Enter를 눌러주세요." + "\n" + "=" * 50)
 
+    maxpage = input("최대 크롤링할 페이지 수 입력하시오: ")
     query = input("검색어 입력: ")
     sort = input("뉴스 검색 방식 입력(관련도순=0  최신순=1  오래된순=2): ")  # 관련도순=0  최신순=1  오래된순=2
     s_date = input("시작날짜 입력(2019.01.04):")  # 2019.01.04
     e_date = input("끝날짜 입력(2019.01.05):")  # 2019.01.05
 
-    crawler(query, sort, s_date, e_date)
+    crawler(maxpage, query, sort, s_date, e_date)
 
 
 main()
