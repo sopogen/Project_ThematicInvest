@@ -1,7 +1,7 @@
 bs4==0.0.1
 pandas==1.0.0
 numpy==1.18.1
-scipy==1.4.1
+scipy==1.5.2
 selenium==3.141.0
 gensim==3.8.3
 requests==2.22.0
