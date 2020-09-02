@@ -1,0 +1,13 @@
+bs4==0.0.1
+pandas==1.0.0
+numpy==1.18.1
+scipy==1.4.1
+selenium==3.141.0
+gensim==3.8.3
+requests==2.22.0
+urllib3==1.25.8
+tabulate==0.8.7
+kobert==0.1.1
+konlpy==0.5.2
+tqdm==4.48.2
+python-crontab==2.5.1

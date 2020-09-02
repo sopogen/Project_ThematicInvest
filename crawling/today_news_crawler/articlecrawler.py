@@ -18,13 +18,6 @@ import pymysql
 import datetime
 import concurrent
 
-import pyarrow as pa
-from pyarrow import csv, parquet
-from s3fs.core import S3FileSystem, aiobotocore
-
-from schema import generate_schema
-from utils import BackOff, loading_time
-
 class ArticleCrawler(object):
     def __init__(self):
         self.categories = {'정치': 100, '경제': 101, '사회': 102, '생활문화': 103, '세계': 104, 'IT과학': 105, '오피니언': 110}
