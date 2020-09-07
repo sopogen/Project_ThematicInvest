@@ -50,7 +50,7 @@ class Writer(object):
         fname = '/Users/jungyulyang/programming/Project_ThematicInvest/data/today_news_data/'\
             + self.category_name + '_' + str(self.save_year) + str(self.save_month)\
             + str(self.save_day) + '.csv'
-        return fname
+        return fname    
 
     def close(self):
         self.file.close()
