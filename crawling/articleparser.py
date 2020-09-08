@@ -35,7 +35,8 @@ class ArticleParser(object):
         # 당일 기사 목록 전체를 알아냄
         try:
             totlapage_url = url
-            request_content = requests.get(totlapage_url)
+            headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)Chrome/63.0.3239.132 Safari/537.36'}
+            request_content = requests.get(totlapage_url, headers = headers)
             document_content = BeautifulSoup(request_content.content, 'html.parser')
             headline_tag = document_content.find('div', {'class': 'paging'}).find('strong')
             regex = re.compile(r'<strong>(?P<num>\d+)')

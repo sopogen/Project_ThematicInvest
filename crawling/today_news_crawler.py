@@ -12,11 +12,12 @@ import os
 import platform
 import calendar
 import requests
+import urllib
 import re
 from datetime import date, timedelta
 import pymysql
 import datetime
-import concurrent
+import concurrent.futures
 
 class ArticleCrawler(object):
     def __init__(self):
@@ -50,6 +51,7 @@ class ArticleCrawler(object):
             day = "0" + str(day)
         url = category_url + str(year) + str(month) + str(day)
         totalpage = ArticleParser.find_news_totalpage(url + "&page=10000")
+        print(totalpage)
         for page in range(1, totalpage + 1):
             made_urls.append(url + "&page=" + str(page))
 
@@ -59,9 +61,10 @@ class ArticleCrawler(object):
     @staticmethod
     def get_url_data(url, max_tries=10):
         remaining_tries = int(max_tries)
+        headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'}
         while remaining_tries > 0:
             try:
-                return requests.get(url)
+                return requests.get(url, headers = headers)
             except ConnectionError:
                 sleep(60)
             remaining_tries = remaining_tries - 1
@@ -116,9 +119,10 @@ class ArticleCrawler(object):
             post.append(line.a.get('href'))  # 해당되는 page에서 모든 기사들의 URL을 post 리스트에 넣음
         del post_temp
 
+        print(post)
         for content_url in post:  # 기사 URL
             # 크롤링 대기 시간
-            sleep(0.01)
+            sleep(0.1)
 
             # 기사 HTML 가져옴
             request_content = self.get_url_data(content_url)
@@ -211,7 +215,8 @@ class ArticleCrawler(object):
             str(tag_headline[0].find_all(text=True)))
         if not text_headline:  # 공백일 경우 기사 제외 처리
             return None
-        return text_headline
+        else:
+            return text_headline
 
     def get_sentence_from_document(self, document):
         tag_content = document.find_all('div', {'id': 'articleBodyContents'})
@@ -219,7 +224,8 @@ class ArticleCrawler(object):
         text_sentence = text_sentence + ArticleParser.clear_content(str(tag_content[0].find_all(text=True)))
         if not text_sentence or len(text_sentence) < 500:  # 공백일 경우 기사 제외 처리
             return None
-        return text_sentence
+        else:
+            return text_sentence
     
     def get_company_from_document(self, document):
         tag_company = document.find_all('meta', {'property': 'me2:category1'})
@@ -227,20 +233,23 @@ class ArticleCrawler(object):
         text_company = text_company + str(tag_company[0].get('content'))
         if not text_company:  # 공백일 경우 기사 제외 처리
             return None
-        return text_company
+        else:
+            return text_company
     
     def get_imgURL_from_document(self, document):
         image_url = document.find('span', {'class':'end_photo_org'}).find('img')['src']
         if not image_url:
             return None
-        return image_url
+        else:
+            return image_url
 
     def get_time_from_document(self, document):
         tag_time = document.find('span', {'class':'t11'}).text.split(" ")[1:]
         news_time = " ".join(tag_time)
         if not news_time:
             return None
-        return news_time
+        else:
+            return news_time
     
     def find_author(self, company_string):
         company_list = company_string.split(" ")
@@ -257,8 +266,7 @@ class ArticleCrawler(object):
 
             front += 1
             back -= 1
-        
-        return None
+
 
     def today_date_loader(self):
         today = date.today()
@@ -272,18 +280,19 @@ class ArticleCrawler(object):
             
 if __name__ == "__main__":
     Crawler = ArticleCrawler()
-    Crawler.set_category("정치", "경제", "사회", "생활문화", "IT과학")
+    # Crawler.set_category("정치", "경제", "사회", "생활문화", "IT과학")
+    Crawler.set_category("정치")
 
     # 날짜 하나씩 불러올때
     # sql_year, sql_month, sql_day = Crawler.date_loader()
     # Crawler.set_date_range(sql_year, sql_month, sql_day)
 
     #오늘 날짜
-    today_year, today_month, today_day = Crawler.today_date_loader()
-    Crawler.set_date_range(today_year, today_month, today_day)
+    # today_year, today_month, today_day = Crawler.today_date_loader()
+    # Crawler.set_date_range(today_year, today_month, today_day)
 
     # 날짜 설정
-    # Crawler.set_date_range(2020, 8, 15)
+    Crawler.set_date_range(2020, 9, 7)
 
     Crawler.start()
     
