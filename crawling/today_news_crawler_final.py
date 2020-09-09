@@ -76,7 +76,7 @@ class ArticleCrawler(object):
 
         writer = Writer(category_name=category_name, date=self.date)
         wcsv = writer.get_writer_csv()
-        wcsv.writerow(["date", "time", "category", "company", "headline", "sentence", "content_url"])
+        wcsv.writerow(["date", "time", "category", "headline", "content"])
         
 
         # 기사 URL 형식
@@ -124,8 +124,6 @@ class ArticleCrawler(object):
                     text_headline = text_headline + ArticleParser.clear_headline(str(tag_headline[0].find_all(text=True)))
                     if not text_headline:  # 공백일 경우 기사 제외 처리
                         continue
-                    
-                    
 
                     # 기사 본문 가져옴
                     tag_content = document_content.find_all('div', {'id': 'articleBodyContents'})
@@ -135,43 +133,19 @@ class ArticleCrawler(object):
                         continue
 
 
-                    # 기사 언론사 가져옴
-                    tag_company = document_content.find_all('meta', {'property': 'me2:category1'})
-                    text_company = ''  # 언론사 초기화
-                    text_company = text_company + str(tag_company[0].get('content'))
-                    if not text_company:  # 공백일 경우 기사 제외 처리
-                        continue
-                    
-                    # # 기사 이미지 url 가져옴
-                    # image_url = document_content.find('span', {'class':'end_photo_org'}).find('img')['src']
-                    # if not image_url:
-                    #     continue
-
                     # 기사 시간 가져옴
                     tag_time = document_content.find('span', {'class':'t11'}).text.split(" ")[1:]
                     news_time = " ".join(tag_time)
                     if not news_time:
                         continue
 
-                    # # 기자 가져옴
-                    # company_list = text_sentence.split(" ")
-                    # front =0
-                    # back = len(company_list) -1
-                    # while front <= back:
-                    #     if company_list[front] == '기자' or company_list[back] == '기자':
-                    #         author_name = company_list[front-1]
-                    #     front += 1
-                    #     back -= 1
-                    # if not author_name:
-                    #     continue
-
 
                     # CSV 작성
                     wcsv = writer.get_writer_csv()
-                    wcsv.writerow([news_date, news_time, category_name, text_company, text_headline, text_sentence, content_url])
+                    wcsv.writerow([news_date, news_time, category_name, text_headline, text_sentence])
                     
-                    del text_company, text_sentence, text_headline, news_time
-                    del tag_company, tag_time
+                    del text_sentence, text_headline, news_time
+                    del tag_time
                     del tag_content, tag_headline
                     del request_content, document_content
 
@@ -185,38 +159,6 @@ class ArticleCrawler(object):
                     print(f"ERROR : {e}")
  
                
-
-    def date_loader(self):
-        with open("/Users/jungyulyang/programming/hell-news/config/credential.json") as json_file:
-            json_data = json.load(json_file)
-
-        db = pymysql.connect(
-            user = json_data['user'],
-            passwd = json_data['passwd'],
-            host = json_data['host'],
-            charset = json_data['charset']
-        )
-
-        cursor = db.cursor(pymysql.cursors.DictCursor)
-        cursor.execute('USE news_crawling')
-
-        sql = "select dates from only_date"
-        cursor.execute(sql)
-        rows = cursor.fetchall()
-        sql_data = str(rows[0])
-
-        numbers = re.findall("\d+", sql_data)
-        sql_year = int(numbers[0])
-        sql_month = int(numbers[1])
-        sql_day = int(numbers[2])
-
-        sql = "delete from only_date limit 1"
-        cursor.execute(sql)
-        db.commit()
-
-        return sql_year, sql_month, sql_day
-
-
     def start(self):
         # MultiProcess 크롤링 시작
         with concurrent.futures.ProcessPoolExecutor() as process:
@@ -247,11 +189,8 @@ class ArticleCrawler(object):
 if __name__ == "__main__":
     Crawler = ArticleCrawler()
     # Crawler.set_category("정치", "경제", "사회", "생활문화", "IT과학")
-    Crawler.set_category("경제")
+    Crawler.set_category("정치")
 
-    # 날짜 하나씩 불러올때
-    # sql_year, sql_month, sql_day = Crawler.date_loader()
-    # Crawler.set_date_range(sql_year, sql_month, sql_day)
 
     #오늘 날짜
     # today_year, today_month, today_day = Crawler.today_date_loader()

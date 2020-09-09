@@ -38,16 +38,15 @@ def get_news_content(n_url):
 
 def crawler(query): 
     page = 1
-    maxpage = 3991  # 11= 2페이지 21=3페이지 31=4페이지  ...81=9페이지 , 91=10페이지, 101=11페이지
+    maxpage = 1000  # 11= 2페이지 21=3페이지 31=4페이지  ...81=9페이지 , 91=10페이지, 101=11페이지
     f = open(RESULT_PATH + "%s.csv" % str(query), 'w', encoding='utf-8', newline="")
     writer = csv.writer(f)
-    writer.writerow(["title", "contents"])
+    writer.writerow(["article", "content"])
 
     while page < maxpage:
         print(page)
 
         url = "https://search.naver.com/search.naver?where=news&query=" + query + "&sm=tab_pge&sort=0&start=" + str(page)
-        print(url)
         req = requests.get(url)
         cont = req.content
         soup = BeautifulSoup(cont, 'html.parser')
@@ -57,15 +56,15 @@ def crawler(query):
             try:    
                 if urls["href"].startswith("https://news.naver.com"):
                     news_title = get_news_title(urls["href"])
-                    print(news_title)
 
                     news_content = get_news_content(urls["href"])
-                    print(news_content)
 
                     if len(news_content) > 500:
                         writer.writerow([news_title, news_content])
                     else:
                         continue
+
+                    print("Done")
                     
 
             except Exception as e:
@@ -75,7 +74,7 @@ def crawler(query):
 
 
 if __name__ == "__main__":
-    RESULT_PATH = '/Users/jungyulyang/programming/Project_ThematicInvest/Data/theme_news_data/'
+    RESULT_PATH = '/Users/jungyulyang/programming/Project_ThematicInvest/Data/theme_news_data_new/'
     query = input("원하는 검색어를 입력하세요: ")
     # query = "5G"
     crawler(query)

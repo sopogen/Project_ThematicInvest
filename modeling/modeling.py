@@ -20,14 +20,14 @@ class Modeling(object):
         self.mecab = Mecab()
 
     
-    def kobert_tokenize_without_normal(self, kobert_news):
+    def kobert_tokenize(self, kobert_news):
         # Remove letters which are not Hangul
         kobert_news_words = self.hangul.sub(' ', kobert_news)
         # Tokenization with KoBERT tokenizer
         kobert_token = self.sp(kobert_news_words)
         return kobert_token
     
-    def mecab_tokenize_without_normal(self, mecab_news):
+    def mecab_tokenize(self, mecab_news):
         # Remove letters which are not Hangul
         mecab_news_words = self.hangul.sub(' ', mecab_news)
          # Tokenization with Mecab tokenizer
@@ -39,7 +39,7 @@ class Modeling(object):
         mecab_token = [word for word in raw_token if word not in stop_words]
         return mecab_token
 
-    def vectorize_without_normal(self, token):
+    def vectorize(self, token):
         #Vectorization with word2vec
         #수정필요 sentence = [token]
         model = Word2Vec(sentences = token, size = self.v_dimension, window = self.v_window, min_count = 5, workers = 4, sg = 0)
@@ -57,11 +57,11 @@ class Modeling(object):
 if __name__ == "__main__":
     news= "(전국종합=연합뉴스) 3일 제9호 태풍 '마이삭'이 몰고 온 강력한 비바람으로 남부지역에 피해가 속출했다."
     Modeler = Modeling()
-    kobert_token = Modeler.kobert_tokenize_without_normal(news)
-    mecab_token = Modeler.mecab_tokenize_without_normal(news)
-    model = Modeler.vectorize_without_normal(kobert_token)
+    kobert_token = Modeler.kobert_tokenize(news)
+    mecab_token = Modeler.mecab_tokenize(news)
+    model = Modeler.vectorize(kobert_token)
     # Saving Model
-    model.save('word2vec.model')
+    # model.save('word2vec.model')
 
 
 
