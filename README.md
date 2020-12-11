@@ -20,7 +20,10 @@
   - 각 뉴스 기사별 vector 추출
   - 뉴스 기사별 vector와 테마별 vector를 비교
     - 코사인 유사도가 가장 높은 테마로 선정
-    - 정확도를 위해 코사인 유사도 93% 이상인 뉴스만 추출  
+    - 정확도를 위해 코사인 유사도 93% 이상인 뉴스만 추출
+    <div>
+    <img width=600 src="https://user-images.githubusercontent.com/61009073/101899194-c0eed700-3bf0-11eb-928a-0659dadc4cda.png">
+    </div>
     
 - Backtest
   - 뉴스 데이터에서 얻은 테마를 기반으로 backtest 진행
