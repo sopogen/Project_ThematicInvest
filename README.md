@@ -1,5 +1,5 @@
-# Project_ThematicInvest
-> NLP를 이용하여 뉴스 데이터를 통한 테마주 찾기  
+# 뉴스 데이터로 테마주 투자하기
+> NLP를 이용하여 뉴스 데이터를 통한 테마주 탐색 및 투자
 > For 2020-1 ybigta conference
 
 ## Background
